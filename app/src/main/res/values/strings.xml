@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MapsApp</string>
+    <string name="title_activity_maps">Map</string>
+
+
+    <string name="text_simple_map">Simple map</string>
+    <string name="text_polygon_map">Polygon map</string>
+    <string name="text_clear">Clear</string>
+    <string name="text_polygon">Polygon</string>
+    <string name="text_polyline">Polyline</string>
+    <string name="title_activity_current_location">Map</string>
+    <string name="text_current_location_map">Current location map</string>
+    <string name="pick_place">Choose a place</string>
+    <string name="text_nearby_places">Nearby places</string>
+    <string name="text_loading">Loading</string>
+</resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/app_bar_clear"
+        android:title="@string/text_clear" />
+
+    <group
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/app_bar_check_polyline"
+            android:title="@string/text_polyline"
+            android:checkable="true" />
+
+        <item
+            android:id="@+id/app_bar_check_polygon"
+            android:title="@string/text_polygon"
+            android:checkable="true" />
+
+    </group>
+
+</menu>
