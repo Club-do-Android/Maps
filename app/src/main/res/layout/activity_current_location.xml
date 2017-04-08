@@ -11,6 +11,13 @@
         android:layout_height="match_parent"
         tools:context="com.ademir.mapsapp.activities.CurrentLocationActivity" />
 
+    <!--map:uiCompass="false"-->
+    <!--map:uiRotateGestures="true"-->
+    <!--map:uiScrollGestures="false"-->
+    <!--map:uiTiltGestures="true"-->
+    <!--map:uiZoomControls="false"-->
+    <!--map:uiZoomGestures="true"/>-->
+
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/et_search"
         android:layout_width="match_parent"
