@@ -30,6 +30,7 @@ public class MarkerMapActivity extends AppCompatActivity implements OnMapReadyCa
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.marker_map);
 
+        //This method must be called from the main thread.
         mapFragment.getMapAsync(this);
     }
 

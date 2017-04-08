@@ -64,11 +64,11 @@ public class CurrentLocationActivity extends AppCompatActivity implements OnMapR
 
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .enableAutoManage(this, this)
+                    .enableAutoManage(this, this) //FragmentActivity, OnConnectionFailedListener
                     .addConnectionCallbacks(this)
-                    .addApi(LocationServices.API)
-                    .addApi(Places.PLACE_DETECTION_API)
-                    .addApi(Places.GEO_DATA_API)
+                    .addApi(LocationServices.API) //The main entry point for location services integration.
+                    .addApi(Places.PLACE_DETECTION_API) //provides quick access to the device's current place...
+                    .addApi(Places.GEO_DATA_API) //provides access to Google's database of local place and business information...
                     .build();
         }
 
@@ -161,8 +161,8 @@ public class CurrentLocationActivity extends AppCompatActivity implements OnMapR
 
         if (mLocationPermissionGranted) {
 
-            @SuppressWarnings("MissingPermission") final
-            PendingResult<PlaceLikelihoodBuffer> result = Places.PlaceDetectionApi.getCurrentPlace(mGoogleApiClient, null);
+            @SuppressWarnings("MissingPermission")
+            final PendingResult<PlaceLikelihoodBuffer> result = Places.PlaceDetectionApi.getCurrentPlace(mGoogleApiClient, null);
             result.setResultCallback(new ResultCallback<PlaceLikelihoodBuffer>() {
                 @Override
                 public void onResult(@NonNull PlaceLikelihoodBuffer likelyPlaces) {

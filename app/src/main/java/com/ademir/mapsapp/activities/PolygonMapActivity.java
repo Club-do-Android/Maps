@@ -170,7 +170,7 @@ public class PolygonMapActivity extends AppCompatActivity implements OnMapReadyC
         }
 
         polygon.setStrokeColor(color);
-        polygon.setFillColor(colors[ (pointCount + 1) % colors.length]);
+        polygon.setFillColor(colors[(pointCount + 1) % colors.length]);
     }
 
 }
