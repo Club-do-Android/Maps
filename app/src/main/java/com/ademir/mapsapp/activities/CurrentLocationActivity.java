@@ -16,6 +16,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -76,7 +77,6 @@ public class CurrentLocationActivity extends AppCompatActivity implements OnMapR
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showProgressDialog(true);
                 searchPlace(etSearch.getText().toString());
                 InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromInputMethod(etSearch.getWindowToken(), 0);
@@ -283,6 +283,7 @@ public class CurrentLocationActivity extends AppCompatActivity implements OnMapR
 
         @Override
         protected double[] doInBackground(String... params) {
+            showProgressDialog(true);
             try {
                 return GeocoderHelper.doGeocoding(CurrentLocationActivity.this, params[0]);
             } catch (final IOException e) {
