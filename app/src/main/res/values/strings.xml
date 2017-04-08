@@ -13,4 +13,6 @@
     <string name="pick_place">Choose a place</string>
     <string name="text_nearby_places">Nearby places</string>
     <string name="text_loading">Loading</string>
+    <string name="search_address">Buscar endereço</string>
+    <string name="show_search_bar">Show search</string>
 </resources>

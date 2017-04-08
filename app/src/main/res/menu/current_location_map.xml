@@ -5,4 +5,8 @@
     <item
         android:id="@+id/action_more_info"
         android:title="@string/text_nearby_places" />
+
+    <item
+        android:id="@+id/action_show_search"
+        android:title="@string/show_search_bar"/>
 </menu>

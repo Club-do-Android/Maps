@@ -1,8 +1,35 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:map="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/current_location_map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ademir.mapsapp.activities.CurrentLocationActivity" />
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <fragment
+        android:id="@+id/current_location_map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.ademir.mapsapp.activities.CurrentLocationActivity" />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/et_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_gravity="top"
+        android:hint="@string/search_address"
+        android:background="@drawable/bg_et_search"
+        android:drawableStart="@drawable/ic_search_black_24dp"
+        android:drawablePadding="5dp"
+        android:imeOptions="actionSearch" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buscar"
+        android:layout_marginEnd="8dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="50dp"/>
+
+</FrameLayout>

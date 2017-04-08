@@ -1,18 +1,28 @@
 package com.ademir.mapsapp.activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.renderscript.ScriptGroup;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ademir.mapsapp.GeocoderHelper;
 import com.ademir.mapsapp.R;
 import com.ademir.mapsapp.models.Place;
 import com.google.android.gms.common.ConnectionResult;
@@ -30,6 +40,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,10 +63,25 @@ public class CurrentLocationActivity extends AppCompatActivity implements OnMapR
 
     private ProgressDialog mProgressDialog;
 
+    private EditText etSearch;
+
+    private Button btnSearch;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_location);
+        etSearch = (EditText) findViewById(R.id.et_search);
+        btnSearch = (Button) findViewById(R.id.btn_search);
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showProgressDialog(true);
+                searchPlace(etSearch.getText().toString());
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromInputMethod(etSearch.getWindowToken(), 0);
+            }
+        });
     }
 
     @Override
@@ -97,6 +123,16 @@ public class CurrentLocationActivity extends AppCompatActivity implements OnMapR
 
             case R.id.action_more_info:
                 showCurrentPlace();
+                return true;
+
+            case R.id.action_show_search:
+                if (etSearch.getVisibility() == View.VISIBLE) {
+                    etSearch.setVisibility(View.GONE);
+                    btnSearch.setVisibility(View.GONE);
+                } else {
+                    etSearch.setVisibility(View.VISIBLE);
+                    btnSearch.setVisibility(View.VISIBLE);
+                }
                 return true;
 
             default:
@@ -235,6 +271,35 @@ public class CurrentLocationActivity extends AppCompatActivity implements OnMapR
             mProgressDialog.show();
         } else {
             mProgressDialog.dismiss();
+        }
+    }
+
+    private void searchPlace(String search) {
+        if (search.isEmpty()) return;
+        new GeocodingTask().execute(search);
+    }
+
+    private class GeocodingTask extends AsyncTask<String, View, double[]> {
+
+        @Override
+        protected double[] doInBackground(String... params) {
+            try {
+                return GeocoderHelper.doGeocoding(CurrentLocationActivity.this, params[0]);
+            } catch (final IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(double[] doubles) {
+            showProgressDialog(false);
+            LatLng latLng = new LatLng(doubles[0], doubles[1]);
+            mMap.addMarker(new MarkerOptions()
+                            .position(latLng))
+                            .setTitle(etSearch.getText().toString());
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, DEFAULT_ZOOM));
         }
     }
 
